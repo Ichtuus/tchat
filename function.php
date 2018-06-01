@@ -88,9 +88,9 @@ function connectUser(PDO $db, $lelogin, $pass) {
     $recup = $db->prepare($sql);
     $recup->bindValue(1,$lelogin,PDO::PARAM_STR);
     $recup->bindValue(2,$pwd,PDO::PARAM_STR);
-    $recupLogin=$recup->execute();
+    $recup->execute();
 
-    return $recupLogin->fetchAll(PDO::FETCH_ASSOC);
+    return $recup->fetch(PDO::FETCH_ASSOC);
 }
 
 
@@ -547,12 +547,13 @@ function counter(PDO $db,int $idutil){
     $recup = $db->query($sql);
     $tabrecup = $recup->fetch(PDO::FETCH_ASSOC);
 
-    echo $tabrecup['COUNT( m.thecontent)'];
-
+   
+  return $tabrecup['COUNT( m.thecontent)'];
 }
 
 // function donner le role
-function yourStatus($nm=260){
+function yourStatus($nm=0){
+
     $status=""; //votre status
     if($nm <= 5){
         $status="Hello world!";
@@ -569,5 +570,5 @@ function yourStatus($nm=260){
     }
   return $status;
 }
-//var_dump(yourStatus(15));
+//var_dump(yourStatus());
 
